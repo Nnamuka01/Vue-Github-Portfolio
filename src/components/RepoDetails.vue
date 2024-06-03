@@ -118,7 +118,7 @@
 
 
 .repo-name {
-    color: #00bd7e;
+    color: #96d6d6;
     font-size: 2rem;
     word-break: break-word;
 }
@@ -136,7 +136,7 @@
 }
 
 #repodetail a {
-    color: #00bd7e;
+    color: #96d6d6;
 }
 
 .repo-mini-details {
@@ -153,7 +153,7 @@
 }
 
 .icons {
-    color: #00bd7e;
+    color: #96d6d6;
 }
 
 .back {
