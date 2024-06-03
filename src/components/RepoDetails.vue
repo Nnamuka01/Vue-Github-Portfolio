@@ -27,6 +27,11 @@
   const fetchData = () => {
   loading.value = true;
   const token = import.meta.env.VITE_GITHUB_TOKEN;
+    if (!token) {
+    console.error('GitHub token is not set');
+    loading.value = false;
+    return;
+  }
   // fetch repo details
   fetch(`https://api.github.com/repos/${username.value}/${route.params.id}`, {
     headers: {
@@ -38,6 +43,9 @@
         return res.json()
     })
     .then((data) => {
+      if (data.message === 'Not Found') {
+        throw new Error('Repository not found');
+      }
         details.name = data.name;
         details.stargazers_count = data.stargazers_count;
         details.watchers = data.watchers;
@@ -58,7 +66,15 @@
     },
    })
     .then((res) => res.json())
-    .then((data) => (branches.value = data));
+    .then((data) => {
+      if (data.message === 'Not Found') {
+        throw new Error('Branches not found');
+      }
+      (branches.value = data)
+    });
+    .catch((error) => {
+      console.error('Error fetching branches:', error);
+    });
    // fetch deployments
    fetch(`https://api.github.com/repos/${username.value}/${route.params.id}/deployments`, {
     headers: {
@@ -67,7 +83,15 @@
     },
    })
     .then((res) => res.json())
-    .then((data) => (deployments.value = data)); 
+    .then((data) => {
+       if (data.message === 'Not Found') {
+        throw new Error('Deployments not found');
+      }
+      (deployments.value = data)
+    }); 
+  .catch((error) => {
+      console.error('Error fetching deployments:', error);
+    });
 };
 
   watchEffect(() => {
