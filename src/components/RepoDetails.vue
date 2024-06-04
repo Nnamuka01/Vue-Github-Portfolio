@@ -29,10 +29,10 @@
   const token = import.meta.env.VITE_GITHUB_TOKEN;
   // fetch repo details
   fetch(`https://api.github.com/repos/${username.value}/${route.params.id}`, {
-    headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-    },
+    // headers: {
+    //     Accept: "application/json",
+    //     Authorization: `Bearer ${token}`,
+    // },
   })
     .then((res) => {
         return res.json()
@@ -52,19 +52,19 @@
     });
     // fetch branches
    fetch(`https://api.github.com/repos/${username.value}/${route.params.id}/branches`, {
-    headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-    },
+    // headers: {
+    //     Accept: "application/json",
+    //     Authorization: `Bearer ${token}`,
+    // },
    })
     .then((res) => res.json())
     .then((data) => (branches.value = data));
    // fetch deployments
    fetch(`https://api.github.com/repos/${username.value}/${route.params.id}/deployments`, {
-    headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-    },
+    // headers: {
+    //     Accept: "application/json",
+    //     Authorization: `Bearer ${token}`,
+    // },
    })
     .then((res) => res.json())
     .then((data) => (deployments.value = data)); 
